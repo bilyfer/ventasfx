@@ -5,28 +5,44 @@
  */
 package pos.bl;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author User
  */
 public class Producto {
-    private Integer id;
-    private String descripcion;
+    private SimpleIntegerProperty id;
+    private SimpleStringProperty descripcion;
+    
+    public Producto() {
+        id = new SimpleIntegerProperty();
+        descripcion = new SimpleStringProperty();
+    }
 
     public Integer getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id.set(id);
+    }
+    
+    public SimpleIntegerProperty idProperty() {
+        return id;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return descripcion.get();
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion.set(descripcion);
+    }
+    
+    public SimpleStringProperty descripcionProperty() {
+        return descripcion;
     }
     
 }
