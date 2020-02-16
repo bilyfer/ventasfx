@@ -8,6 +8,9 @@ package pos.fx;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,8 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -38,6 +44,27 @@ public class FormProductoController implements Initializable {
     @FXML
     private TableColumn<Producto, String> colDescripcion;
     
+    @FXML
+    private TableColumn<Producto, String> colCategoria;
+    
+    @FXML
+    private TableColumn<Producto, Double> colPrecio;
+
+    @FXML
+    private TableColumn<Producto, Integer> colExistencia;    
+    
+    @FXML
+    private TableColumn<Producto, Boolean> colActivo;
+    
+    @FXML
+    private TableColumn colEditar;
+    
+    @FXML
+    private TableColumn colEliminar;
+    
+    @FXML
+    private TextField txtBuscar;    
+        
     ObservableList<Producto> data;
     
     ProductosServicio servicio;
@@ -51,6 +78,14 @@ public class FormProductoController implements Initializable {
        
        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
        colDescripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+       colCategoria.setCellValueFactory(c -> new SimpleStringProperty(c.getValue()
+               .getCategoria().getDescripcion()));
+       colPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+       colExistencia.setCellValueFactory(new PropertyValueFactory<>("existencia"));
+       colActivo.setCellValueFactory(new PropertyValueFactory<>("activo"));
+       
+       definirColumnaEditar();
+       definirColumnaEliminar();
        
        cargarDatos();
     }    
@@ -60,8 +95,15 @@ public class FormProductoController implements Initializable {
         abrirVentanaModal(nuevoProducto, "Nuevo Producto");
     }
     
-    public void guardar(Producto producto) {
-        servicio.guardar(producto);
+    public String guardar(Producto producto) {
+        String resultado = servicio.guardar(producto);
+        if (resultado.equals("")) {
+            cargarDatos();          
+        }
+        return resultado;
+    }
+    
+    public void buscar() {
         cargarDatos();
     }
 
@@ -83,10 +125,64 @@ public class FormProductoController implements Initializable {
     }
 
     private void cargarDatos() {
-       data = FXCollections.observableArrayList(servicio.obtenerProductos());
-       
+        if (txtBuscar.getText() == null || txtBuscar.getText().equals("")) {
+            data = FXCollections.observableArrayList(servicio.obtenerProductos());     
+        } else {
+            data = FXCollections
+                    .observableArrayList(servicio.obtenerProductos(txtBuscar.getText()));
+        }
+              
        tableView.setItems(data);
        tableView.refresh();
+    }
+
+    private void definirColumnaEditar() {
+        colEditar.setCellFactory(param -> new TableCell<String, String>() {
+            final Button btn = new Button("Editar");
+            
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    btn.setOnAction(event -> {
+                        Producto producto = (Producto) getTableRow().getItem();
+                        try {
+                            abrirVentanaModal(producto, "Editar Producto");
+                        } catch (IOException ex) {
+                            Logger.getLogger(FormProductoController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    });
+                    setGraphic(btn);
+                    setText(null);
+                }
+            }            
+        });
+    }
+
+    private void definirColumnaEliminar() {
+        colEliminar.setCellFactory(param -> new TableCell<String, String>() {
+            final Button btn = new Button("Eliminar");
+            
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    btn.setOnAction(event -> {
+                        Producto producto = (Producto) getTableRow().getItem();
+                        servicio.eliminar(producto);
+                        cargarDatos();
+                    });
+                    setGraphic(btn);
+                    setText(null);
+                }
+            }            
+        });        
     }
     
 }

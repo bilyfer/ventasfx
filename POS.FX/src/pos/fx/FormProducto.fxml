@@ -3,17 +3,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="pos.fx.FormProductoController">
+<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.fx.FormProductoController">
    <children>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="129.0" prefHeight="252.0" prefWidth="568.0">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="129.0" prefHeight="252.0" prefWidth="803.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="colDescripcion" prefWidth="239.0" text="Descripción" />
+            <TableColumn fx:id="colCategoria" prefWidth="75.0" text="Categoria" />
+            <TableColumn fx:id="colPrecio" prefWidth="75.0" text="Precio" />
+            <TableColumn fx:id="colExistencia" prefWidth="75.0" text="Existencia" />
+            <TableColumn fx:id="colActivo" prefWidth="75.0" text="Activo" />
+            <TableColumn fx:id="colEditar" prefWidth="75.0" />
+            <TableColumn fx:id="colEliminar" prefWidth="75.0" />            
         </columns>
       </TableView>
-      <Button fx:id="btnNuevo" onAction="#nuevoProducto" layoutX="530.0" layoutY="88.0" mnemonicParsing="false" text="Nuevo" />
+      <Button fx:id="btnNuevo" layoutX="766.0" layoutY="86.0" mnemonicParsing="false" onAction="#nuevoProducto" text="Nuevo" />
+      <TextField fx:id="txtBuscar" layoutX="13.0" layoutY="74.0" prefHeight="25.0" prefWidth="208.0" />
+      <Button fx:id="btnBuscar" onAction="#buscar" layoutX="231.0" layoutY="74.0" mnemonicParsing="false" text="Buscar" />
    </children>
 </AnchorPane>
