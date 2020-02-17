@@ -18,7 +18,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -175,14 +178,26 @@ public class FormProductoController implements Initializable {
                 } else {
                     btn.setOnAction(event -> {
                         Producto producto = (Producto) getTableRow().getItem();
-                        servicio.eliminar(producto);
-                        cargarDatos();
+                        eliminar(producto);
                     });
                     setGraphic(btn);
                     setText(null);
                 }
             }            
         });        
+    }
+    
+    private void eliminar(Producto producto) {
+        Alert alert = new Alert(AlertType.CONFIRMATION,
+                "¿Esta seguro que desea eliminar el producto " + producto.getDescripcion() + "?",
+                ButtonType.YES, ButtonType.NO);
+        
+        alert.showAndWait();
+        
+        if (alert.getResult() == ButtonType.YES) {
+            servicio.eliminar(producto);
+            cargarDatos();   
+        }       
     }
     
 }
