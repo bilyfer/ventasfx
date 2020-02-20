@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+<VBox alignment="CENTER" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="samplefx.ctrl.FXML2Controller">
+   <children>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="VBox" stylesheets="@main.css" VBox.vgrow="NEVER">
+         <children>
+            <Label text="Form - 2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="200.0" prefWidth="506.0" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </HTMLEditor>
+   </children>
+</VBox>

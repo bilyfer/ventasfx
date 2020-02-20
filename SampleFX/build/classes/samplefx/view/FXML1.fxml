@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="samplefx.ctrl.FXML1Controller">
+   <children>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="VBox" stylesheets="@main.css" VBox.vgrow="NEVER">
+         <children>
+            <Button mnemonicParsing="false" text="Button">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" text="Button" />
+         </children>
+      </HBox>
+      <TableView tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn prefWidth="100.0" text="Row Index" />
+          <TableColumn prefWidth="300.0" text="Data" />
+        </columns>
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </TableView>
+   </children>
+</VBox>
