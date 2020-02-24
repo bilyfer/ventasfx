@@ -5,6 +5,9 @@
  */
 package pos.fx;
 
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,10 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 import pos.bl.Categoria;
 import pos.bl.CategoriasServicio;
@@ -33,22 +34,22 @@ public class NuevoEditarProductoController implements Initializable {
     Button btnCancelar;
     
     @FXML
-    TextField txtId;
+    JFXTextField txtId;
     
     @FXML
-    TextField txtDescripcion;    
+    JFXTextField txtDescripcion;    
 
     @FXML
-    ComboBox cmbCategoria;    
+    JFXComboBox cmbCategoria;    
     
     @FXML
-    TextField txtPrecio;
+    JFXTextField txtPrecio;
     
     @FXML
-    TextField txtExistencia;
+    JFXTextField txtExistencia;
 
     @FXML
-    CheckBox chActivo;        
+    JFXCheckBox chActivo;        
     
     private FormProductoController controller;
     private Producto producto;
@@ -64,6 +65,20 @@ public class NuevoEditarProductoController implements Initializable {
         txtId.textProperty().bindBidirectional(producto.idProperty(), new NumberStringConverter());
         txtDescripcion.textProperty().bindBidirectional(producto.descripcionProperty());        
         cmbCategoria.valueProperty().bindBidirectional(producto.categoriaProperty());        
+        
+        cmbCategoria.setConverter(new StringConverter<Categoria>() {
+            @Override
+            public String toString(Categoria categoria) {
+                return categoria == null ? "" : categoria.getDescripcion();
+            }
+
+            @Override
+            public Categoria fromString(String string) {
+                return new Categoria(string);
+            }
+        
+        });
+        
         txtPrecio.textProperty().bindBidirectional(producto.precioProperty(), new NumberStringConverter());        
         txtExistencia.textProperty().bindBidirectional(producto.existenciaProperty(), new NumberStringConverter());        
         chActivo.selectedProperty().bindBidirectional(producto.activoProperty());        
