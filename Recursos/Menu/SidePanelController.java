@@ -29,9 +29,7 @@ public class SidePanelController implements Initializable {
                 System.exit(0);
             } else {
                 callback.abrirFormulario(label.getText());    
-            }
-            
-            callback.abrirFormulario(label.getText());
+            }           
         });
     }
 
