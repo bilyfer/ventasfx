@@ -54,6 +54,7 @@ public class NuevoEditarProductoController implements Initializable {
     private FormProductoController controller;
     private Producto producto;
     private CategoriasServicio categoriasServicio;
+    private ObservableList<Categoria> data;
     
     public void setController(FormProductoController controller) {
         this.controller = controller;
@@ -74,7 +75,17 @@ public class NuevoEditarProductoController implements Initializable {
 
             @Override
             public Categoria fromString(String string) {
-                return new Categoria(string);
+                if (data == null) {
+                    return null;
+                }
+                
+                for(Categoria categoria: data) {
+                    if (categoria.getDescripcion().equals(string)) {
+                        return categoria;
+                    }
+                }
+                
+                return null;
             }
         
         });
@@ -91,8 +102,7 @@ public class NuevoEditarProductoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         categoriasServicio = new CategoriasServicio();
         
-        ObservableList<Categoria> data
-              = FXCollections.observableArrayList(categoriasServicio.obtenerCategorias());
+        data = FXCollections.observableArrayList(categoriasServicio.obtenerCategorias());
        
         cmbCategoria.setItems(data);
     }    

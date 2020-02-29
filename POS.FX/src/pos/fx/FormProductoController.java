@@ -155,7 +155,9 @@ public class FormProductoController implements Initializable {
                     btn.getStyleClass().add("jfx-button-info-outline");
                     btn.setOnAction(event -> {
                         tableView.getSelectionModel().select(getTableRow().getItem());
-                        Producto producto = (Producto) getTableRow().getItem();
+                        Producto productoExistente = (Producto) getTableRow().getItem();
+                        Producto producto = servicio.clonar(productoExistente);
+                        
                         try {
                             abrirVentanaModal(producto, "Editar Producto");
                         } catch (IOException ex) {

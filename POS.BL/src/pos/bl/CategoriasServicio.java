@@ -6,34 +6,28 @@
 package pos.bl;
 
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 
 /**
  *
  * @author User
  */
 public class CategoriasServicio {
-    private final ArrayList<Categoria> listadeCategorias;
-
-    public CategoriasServicio() {
-        listadeCategorias = new ArrayList<>();
-        
-        crearDatosdePrueba();
-    }
-    
     public ArrayList<Categoria> obtenerCategorias() {
-        return listadeCategorias;
-    }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
 
-    private void crearDatosdePrueba() {
-        Categoria categoria1 = new Categoria("Celulares");
-        categoria1.setId(1);
+        Criteria query = session.createCriteria(Categoria.class);
+        List<Categoria> resultado =  query.list();
         
-        Categoria categoria2 = new Categoria("Accesorios");
-        categoria2.setId(2);
+        tx.commit();
+        session.close();
         
-        listadeCategorias.add(categoria1);
-        listadeCategorias.add(categoria2);
-    }
-    
-    
+        return new ArrayList<>(resultado);
+    }    
 }

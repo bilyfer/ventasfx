@@ -35,7 +35,7 @@
         <columns>
           <TableColumn fx:id="colId" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" style="-fx-alignment: CENTER-LEFT;" text="Id" />
           <TableColumn fx:id="colDescripcion" prefWidth="70.0" style="-fx-alignment: CENTER-LEFT;" text="Descripción" />
-            <TableColumn fx:id="colCategoria" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" style="-fx-alignment: CENTER-LEFT;" text="Categoria" />
+            <TableColumn fx:id="colCategoria" prefWidth="200.0" style="-fx-alignment: CENTER-LEFT;" text="Categoria" />
             <TableColumn fx:id="colPrecio" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER-RIGHT;" text="Precio" />
             <TableColumn fx:id="colExistencia" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER-RIGHT;" text="Existencia" />
             <TableColumn fx:id="colActivo" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" style="-fx-alignment: CENTER;" text="Activo" />
