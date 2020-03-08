@@ -5,18 +5,28 @@
  */
 package pos.bl;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
+import javax.imageio.ImageIO;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -32,6 +42,8 @@ public class Producto {
     private SimpleDoubleProperty precio;
     private SimpleIntegerProperty existencia;
     private SimpleBooleanProperty activo;
+    private SimpleObjectProperty imageView;
+    private byte[] imagen;    
     
     public Producto() {
         id = new SimpleIntegerProperty();
@@ -40,6 +52,8 @@ public class Producto {
         precio = new SimpleDoubleProperty();
         existencia = new SimpleIntegerProperty();
         activo = new SimpleBooleanProperty(true);
+        imageView = new SimpleObjectProperty();
+        imagen = "0".getBytes();        
     }
 
     @Id
@@ -117,4 +131,49 @@ public class Producto {
     public SimpleObjectProperty categoriaProperty() {
         return categoria;
     }
+    
+    @Lob
+    @Column(name = "imagen", columnDefinition = "LONGBLOB")
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+        
+        Image img = new Image(new ByteArrayInputStream(imagen));        
+        imageViewProperty().set(img);
+    }
+
+    @Transient
+    public Image getImageView() {
+        Image img = new Image(new ByteArrayInputStream(imagen));        
+        return img;        
+    }
+    
+        
+    public void setImageView(Image image) {  
+        if (image == null) {
+            setImagen("0".getBytes());
+            return;
+        }
+        
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        
+        try {
+            ImageIO.write(bImage, "png", stream);
+            byte[] bytes  = stream.toByteArray();
+            stream.close();
+            setImagen(bytes);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        imageView.set(image);
+    }
+    
+    public SimpleObjectProperty imageViewProperty() {   
+        return imageView;
+    }    
 }

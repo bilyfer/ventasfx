@@ -4,17 +4,26 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.fx.NuevoEditarProductoController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="750.0" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.fx.NuevoEditarProductoController">
    <children>
       <JFXTextField fx:id="txtDescripcion" labelFloat="true" layoutX="130.0" layoutY="100.0" prefHeight="25.0" prefWidth="423.0" promptText="Descripción" />
       <JFXComboBox fx:id="cmbCategoria" editable="true" labelFloat="true" layoutX="130.0" layoutY="150.0" prefWidth="150.0" promptText="Categoria" />
       <JFXTextField fx:id="txtPrecio" labelFloat="true" layoutX="130.0" layoutY="200.0" promptText="Precio" />
       <JFXTextField fx:id="txtExistencia" labelFloat="true" layoutX="130.0" layoutY="250.0" promptText="Existencia" />
       <JFXCheckBox fx:id="chActivo" layoutX="130.0" layoutY="300.0" mnemonicParsing="false" />
-      <JFXButton fx:id="btnAceptar" layoutX="430.0" layoutY="339.0" mnemonicParsing="false" onAction="#aceptar" styleClass="jfx-button-ok" text="Aceptar" />
-      <JFXButton fx:id="btnCancelar" layoutX="506.0" layoutY="339.0" mnemonicParsing="false" onAction="#cancelar" styleClass="jfx-button-flat" text="Cancelar" />
+      <JFXButton fx:id="btnAceptar" layoutX="584.0" layoutY="337.0" mnemonicParsing="false" onAction="#aceptar" styleClass="jfx-button-ok" text="Aceptar" />
+      <JFXButton fx:id="btnCancelar" layoutX="660.0" layoutY="337.0" mnemonicParsing="false" onAction="#cancelar" styleClass="jfx-button-flat" text="Cancelar" />
       <JFXTextField fx:id="txtId" disable="true" editable="false" labelFloat="true" layoutX="130.0" layoutY="50.0" prefHeight="25.0" prefWidth="57.0" promptText="Id" />
+      <VBox alignment="CENTER" layoutX="448.0" layoutY="30.0" prefHeight="200.0" prefWidth="280.0" style="-fx-background-color: #fafafb;">
+         <children>
+            <ImageView fx:id="imgViewImagen" fitHeight="190.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="btnAgregar" layoutX="513.0" layoutY="237.0" onAction="#agregarImagen" text="Agregar" />
+      <JFXButton fx:id="btnRemover" layoutX="608.0" layoutY="237.0" onAction="#removerImagen" text="Remover" />
    </children>
 </AnchorPane>

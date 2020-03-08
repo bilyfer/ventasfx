@@ -29,6 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pos.bl.Producto;
@@ -66,6 +67,9 @@ public class FormProductoController implements Initializable {
     
     @FXML
     private TableColumn colEliminar;
+
+    @FXML
+    private TableColumn colImagen;
     
     @FXML
     private JFXTextField txtBuscar;    
@@ -91,6 +95,7 @@ public class FormProductoController implements Initializable {
        
        definirColumnaEditar();
        definirColumnaEliminar();
+       definitColumnaImagen();
        
        cargarDatos();
     }    
@@ -206,6 +211,29 @@ public class FormProductoController implements Initializable {
             servicio.eliminar(producto);
             cargarDatos();   
         }       
+    }
+
+    private void definitColumnaImagen() {
+        colImagen.setCellFactory(param -> new TableCell<String, String>() {
+            final ImageView img = new ImageView();
+            
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                    setText(null);
+                } else {
+                    Producto producto = (Producto) getTableRow().getItem();
+                    img.imageProperty().set(producto.getImageView());
+                    img.setFitWidth(100);
+                    img.setPreserveRatio(true);
+                    
+                    setGraphic(img);
+                    setText(null);
+                }
+            }            
+        });         
     }
     
 }
