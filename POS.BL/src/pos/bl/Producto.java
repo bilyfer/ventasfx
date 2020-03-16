@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Set;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -175,5 +177,16 @@ public class Producto {
     
     public SimpleObjectProperty imageViewProperty() {   
         return imageView;
+    }    
+    
+    private Set<FacturaDetalle> facturaDetalle;
+
+    @OneToMany(mappedBy="producto")
+    public Set<FacturaDetalle> getFacturaDetalle() {
+        return facturaDetalle;
+    }
+
+    public void setFacturaDetalle(Set<FacturaDetalle> facturaDetalle) {
+        this.facturaDetalle = facturaDetalle;
     }    
 }

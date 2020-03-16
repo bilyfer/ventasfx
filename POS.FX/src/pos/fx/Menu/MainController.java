@@ -114,6 +114,9 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Productos":
                     nombreFxml = "FormProducto.fxml";
                     break;
+                case "Facturas":
+                    nombreFxml = "FormFactura.fxml";
+                    break;                    
                 case "Clientes":
                     nombreFxml = "FormCliente.fxml";
                     break;

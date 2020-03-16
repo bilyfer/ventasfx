@@ -56,5 +56,7 @@ Contributor(s):
     <property name="hbm2ddl.auto">update</property> 
     <mapping class="pos.bl.Categoria"/>
     <mapping class="pos.bl.Producto"/>    
+    <mapping class="pos.bl.Factura"/>
+    <mapping class="pos.bl.FacturaDetalle"/>
   </session-factory>
 </hibernate-configuration>

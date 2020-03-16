@@ -18,6 +18,21 @@ import org.hibernate.criterion.Restrictions;
  * @author User
  */
 public class ProductosServicio {
+    public ArrayList<Producto> obtenerProductosActivos() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        
+        Criteria query = session.createCriteria(Producto.class);
+        query.add(Restrictions.eq("activo", true));
+        List<Producto> resultado = query.list();
+        
+        tx.commit();
+        session.close();
+ 
+        return new ArrayList<>(resultado);
+    }
+    
     public ArrayList<Producto> obtenerProductos() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         

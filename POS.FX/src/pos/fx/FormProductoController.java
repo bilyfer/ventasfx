@@ -225,12 +225,14 @@ public class FormProductoController implements Initializable {
                     setText(null);
                 } else {
                     Producto producto = (Producto) getTableRow().getItem();
-                    img.imageProperty().set(producto.getImageView());
-                    img.setFitWidth(100);
-                    img.setPreserveRatio(true);
-                    
-                    setGraphic(img);
-                    setText(null);
+                    if (producto != null) {
+                        img.imageProperty().set(producto.getImageView());
+                        img.setFitWidth(100);
+                        img.setPreserveRatio(true);
+
+                        setGraphic(img);
+                        setText(null);   
+                    }
                 }
             }            
         });         
