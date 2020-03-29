@@ -5,6 +5,7 @@
  */
 package pos.bl;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -26,10 +27,12 @@ public class Factura {
     private Double total;
     private Double impuesto;
     private Boolean activo;
+    private Date fecha;
 
     public Factura() {
         activo = true;
         facturaDetalle = new HashSet<>();
+        fecha = new Date();
     }
 
     @Id
@@ -76,4 +79,12 @@ public class Factura {
     public void setFacturaDetalle(Set<FacturaDetalle> facturaDetalle) {
         this.facturaDetalle = facturaDetalle;
     }    
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 }

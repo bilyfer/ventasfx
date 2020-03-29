@@ -17,11 +17,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import pos.fx.ReporteFacturasViewer;
+import pos.fx.ReporteProductosViewer;
 
 public class MainController implements Initializable, AbrirFormularioCallback {
 
@@ -120,9 +122,14 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Clientes":
                     nombreFxml = "FormCliente.fxml";
                     break;
-                case "Reportes":
-                    nombreFxml = "FormReportes.fxml";
+                case "Reporte de Productos":
+                    nombreFxml = "FormReporteProductos.fxml";
                     break;
+                case "Reporte de Facturas":
+                {
+                   nombreFxml = "FormReporteFacturas.fxml";
+                   break;
+                }
             }
             
             form = FXMLLoader.load(getClass().getResource(("/pos/fx/" + nombreFxml)));

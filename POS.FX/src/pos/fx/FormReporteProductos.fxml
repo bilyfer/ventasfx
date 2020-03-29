@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+
+<VBox alignment="CENTER" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.fx.FormReporteProductosController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label style="-fx-font-size: 24;" text="Reporte de Productos" textFill="#1100ff" />
+                  <HBox VBox.vgrow="ALWAYS">
+                     <children>
+
+                     </children>
+                  </HBox>
+                  <JFXButton fx:id="btnGenerar" onAction="#generarReporte" prefHeight="40.0" prefWidth="80.0" styleClass="jfx-button-ok" text="Generar" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

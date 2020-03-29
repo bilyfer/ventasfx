@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -153,6 +154,15 @@ public class Producto {
         return img;        
     }
     
+    @Transient
+    public String getDescripcionCategoria() {
+        return getCategoria().getDescripcion();
+    }
+    
+    @Transient
+    public InputStream getFoto() {
+        return new ByteArrayInputStream(imagen);
+    }
         
     public void setImageView(Image image) {  
         if (image == null) {

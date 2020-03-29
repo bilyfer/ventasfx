@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="CENTER" style="-fx-background-color: white;" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pos.fx.FormReporteFacturasController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="200.0" prefWidth="500.0">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <Label style="-fx-font-size: 24;" text="Reporte de Ventas" textFill="#1100ff" />
+                  <HBox VBox.vgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0">
+                           <children>
+                              <JFXDatePicker fx:id="datePickerFechaInicial" promptText="Fecha Inicial" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0">
+                           <children>
+                              <JFXDatePicker fx:id="datePickerFechaFinal" promptText="Fecha Final" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <JFXButton fx:id="btnGenerar" onAction="#generarReporte" prefHeight="40.0" prefWidth="80.0" styleClass="jfx-button-ok" text="Generar" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
