@@ -58,5 +58,6 @@ Contributor(s):
     <mapping class="pos.bl.Producto"/>    
     <mapping class="pos.bl.Factura"/>
     <mapping class="pos.bl.FacturaDetalle"/>
+    <mapping class="pos.bl.Usuario"/>
   </session-factory>
 </hibernate-configuration>

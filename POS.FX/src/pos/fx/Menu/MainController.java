@@ -15,6 +15,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -119,9 +121,6 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 case "Facturas":
                     nombreFxml = "FormFactura.fxml";
                     break;                    
-                case "Clientes":
-                    nombreFxml = "FormCliente.fxml";
-                    break;
                 case "Reporte de Productos":
                     nombreFxml = "FormReporteProductos.fxml";
                     break;
@@ -129,6 +128,11 @@ public class MainController implements Initializable, AbrirFormularioCallback {
                 {
                    nombreFxml = "FormReporteFacturas.fxml";
                    break;
+                }
+                case "Cerrar Sesión":
+                {
+                    cerrarSesion();
+                    return;
                 }
             }
             
@@ -172,5 +176,17 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             form.setPrefWidth(stage.getWidth());
             form.setPrefHeight(stage.getHeight());
         }
+    }
+
+    private void cerrarSesion() throws IOException {
+        Stage stage = POSFX.getStage();
+        Parent root = FXMLLoader.load(getClass()
+                .getResource("/pos/fx/FormLogin.fxml"));
+        
+        Scene scene = new Scene(root);
+        
+        stage.setScene(scene);
+        stage.setTitle("Ingresar al Sistema");
+        stage.show();        
     }
 }
