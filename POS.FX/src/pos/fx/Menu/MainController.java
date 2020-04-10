@@ -58,6 +58,8 @@ public class MainController implements Initializable, AbrirFormularioCallback {
             controller.setCallback(this);
             drawer.setSidePane(box);
             
+            abrirFormularioPredeterminado();
+            
             FitControlsToWindow();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -115,6 +117,9 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         try {
             String nombreFxml = "";
             switch(nombreFormulario) {
+                case "Inicio":
+                    nombreFxml = "FormTablero.fxml";
+                    break;
                 case "Productos":
                     nombreFxml = "FormProducto.fxml";
                     break;
@@ -188,5 +193,24 @@ public class MainController implements Initializable, AbrirFormularioCallback {
         stage.setScene(scene);
         stage.setTitle("Ingresar al Sistema");
         stage.show();        
+    }
+
+    private void abrirFormularioPredeterminado() {
+        String role = POSFX.getUsuarioAutenticado().getRole();
+        
+        switch(role) {
+            case "Administrador": {
+                abrirFormulario("Inicio");
+                break;
+            }
+            case "Cajero": {
+                abrirFormulario("Facturas");              
+                break;
+            }
+            case "Inventario": {
+                abrirFormulario("Productos");                   
+                break;
+            }            
+        }        
     }
 }

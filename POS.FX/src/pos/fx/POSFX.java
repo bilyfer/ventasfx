@@ -6,10 +6,12 @@
 package pos.fx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import pos.bl.Usuario;
 
 /**
@@ -34,7 +36,12 @@ public class POSFX extends Application {
     }
     
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception {        
+        stage.setOnCloseRequest((WindowEvent t) -> {
+            Platform.exit();
+            System.exit(0);
+        });
+        
         POSFX.stage = stage;
         Parent root = FXMLLoader.load(getClass()
                 .getResource("/pos/fx/FormLogin.fxml"));

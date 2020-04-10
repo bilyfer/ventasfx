@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -71,7 +72,7 @@ public class Factura {
         
     private Set<FacturaDetalle> facturaDetalle;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="factura")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="factura", fetch = FetchType.EAGER)
     public Set<FacturaDetalle> getFacturaDetalle() {
         return facturaDetalle;
     }    

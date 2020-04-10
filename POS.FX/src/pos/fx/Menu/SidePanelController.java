@@ -23,6 +23,7 @@ public class SidePanelController implements Initializable {
         
         switch(role) {
             case "Administrador": {
+                listView.getItems().add(new Label("Inicio"));
                 listView.getItems().add(new Label("Productos"));
                 listView.getItems().add(new Label("Facturas"));
                 listView.getItems().add(new Label("Reporte de Productos"));   

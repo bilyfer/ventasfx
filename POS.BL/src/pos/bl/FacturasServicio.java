@@ -11,6 +11,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -18,6 +19,24 @@ import org.hibernate.criterion.Restrictions;
  * @author User
  */
 public class FacturasServicio {
+    public ArrayList<Factura> obtenerUltimasFacturasEmitidas() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+        Transaction tx = session.beginTransaction();
+        
+        Criteria query = session.createCriteria(Factura.class);
+        query.addOrder(Order.desc("fecha"));
+        query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        query.setMaxResults(10);
+
+        List<Factura> resultado = query.list();
+        
+        tx.commit();
+        session.close();
+ 
+        return new ArrayList<>(resultado);
+    }
+    
     public ArrayList<Factura> obtenerFacturas(Date fechaInicial, Date fechaFinal) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         
@@ -27,6 +46,7 @@ public class FacturasServicio {
         query.add(Restrictions.ge("fecha", fechaInicial)); 
         query.add(Restrictions.le("fecha", fechaFinal)); 
         query.add(Restrictions.eq("activo", true));
+        query.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 
         List<Factura> resultado = query.list();
         
